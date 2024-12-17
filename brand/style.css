@@ -1,0 +1,58 @@
+body {
+    background-color:#e8e8e8;
+    background-image: url(https://images4.alphacoders.com/131/1318497.jpeg);
+    background-size:cover ;
+    margin: auto;
+    
+}
+header {
+    background: black;
+    color: white;
+    text-align: left 100px;
+}
+nav {
+    color:#e8e8e8;
+   
+}
+nav a {
+    margin: 0 50px;
+    text-decoration: none;
+    color: #ffffff;
+    line-height: 100%;
+    font-family:"Oswald", serif;
+    font: weight 500px;
+    font-style: normal;
+    font-size: 20px;
+    
+  
+}
+
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.header-container .logo img {
+    width: 80px;
+    height: 80px;
+}
+.registr {
+    
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: none;
+}
+footer {
+    text-align: center;
+    margin-top: 800px;
+    padding: 10px;
+    font-family:"Oswald", serif;
+    font: weight 500px;
+    font-size: 14px;
+    color: white;
+    background-color:black;
+}
