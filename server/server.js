@@ -1,9 +1,11 @@
+require("dotenv").config({path: __dirname+"/.env"});
 const express = require("express");
 const sequelize = require("./db");
 const User = require("./models/user");
 const Enrollment = require("./models/enrollment");
 const apiRouter = require("./routes/index");
 const errorHandler = require("./middlewares/errorHandlingMiddleware");
+
 
 const app = express();
 app.use(express.json());
