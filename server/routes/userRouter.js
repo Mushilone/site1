@@ -9,9 +9,7 @@ router.get("/auth", userController.check);
 
 router.get("/", userController.get);
 router.get("/:id", userController.getId);
-router.post("/", userController.post);
 router.put("/", userController.put);
-router.delete("/", userController.delete);
 
 
 

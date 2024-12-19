@@ -6,7 +6,7 @@ router.get('/', enrollmentController.get);
 router.get("/:id", enrollmentController.getId);
 router.post("/", enrollmentController.post);
 router.put("/", enrollmentController.put);
-router.delete("/", enrollmentController.delete);
+router.delete("/:id", enrollmentController.delete);
 
 
 module.exports = router;

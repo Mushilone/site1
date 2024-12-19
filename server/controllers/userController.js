@@ -3,7 +3,7 @@ const User = require("../models/user");
 
 class UserController {
     async register(req, res) {
-
+        
     }
     async login(req, res) {
 
@@ -23,14 +23,8 @@ class UserController {
             return next(ApiError.badRequest("User GET: invalid id param!"));
         res.json(await User.findAll({ where: { id: idParam } }));
     }
-    async post(req, res, next) {
-
-    }
     async put(req, res) {
         
-    }
-    async delete(req, res) {
-
     }
 
 }

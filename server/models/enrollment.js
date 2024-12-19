@@ -3,7 +3,7 @@ const sequelize = require("../db");
 
 const Enrollment = sequelize.define("Enrollment", {
     id: {type: DataTypes.INTEGER, autoIncrement:true, primaryKey:true},
-    date: {type:DataTypes.DATE, allowNull:false}
+    date: {type:DataTypes.DATEONLY, allowNull:false}
 });
 
 module.exports = Enrollment;
