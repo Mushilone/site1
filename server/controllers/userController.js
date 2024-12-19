@@ -1,9 +1,10 @@
 const ApiError = require("../error/apiError");
 const User = require("../models/user");
 
+///TODO: вернуться с auth.
 class UserController {
     async register(req, res) {
-        
+
     }
     async login(req, res) {
 
