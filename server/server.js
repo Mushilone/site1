@@ -2,9 +2,11 @@ const express = require("express");
 const sequelize = require("./db");
 const User = require("./models/user");
 const Enrollment = require("./models/enrollment");
+const apiRouter = require("./routes/index");
 
 const app = express();
 app.use(express.json());
+app.use("/api", apiRouter);
 
 (async () => {
     try {
