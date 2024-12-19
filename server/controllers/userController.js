@@ -9,32 +9,25 @@ class UserController {
 
     }
     async check(req, res, next) {
-        const idQuery = req.query.id;
-        if(idQuery == null)
-            return next(ApiError.badRequest("Auth: Id is null!"));
-        res.json("true");
+
     }
 
     async get(req, res) {
         res.json(await User.findAll());
     }
-    async getId(req, res) {
+    async getId(req, res, next) {
         const idParam = req.params.id;
-        if (idParam == null) {
-            res.status(400).send("Invalid id request parameter.");
-            return;
-        }
-        if (isNaN(idParam)) {
-            res.status(400).send("Id param is NaN!");
-            return;
-        }
+        if (idParam == null)
+            return next(ApiError.badRequest("User GET: id parameter is null!"));
+        if (isNaN(idParam)) 
+            return next(ApiError.badRequest("User GET: invalid id param!"));
         res.json(await User.findAll({ where: { id: idParam } }));
     }
-    async post(req, res) {
+    async post(req, res, next) {
 
     }
     async put(req, res) {
-
+        
     }
     async delete(req, res) {
 

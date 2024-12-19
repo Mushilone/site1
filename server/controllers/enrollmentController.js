@@ -1,3 +1,4 @@
+const ApiError = require("../error/apiError");
 const Enrollment = require("../models/enrollment");
 
 class EnrollmentController{
@@ -5,7 +6,7 @@ class EnrollmentController{
 
     }
     async getId(req, res){
-        
+
     }
     async post(req, res){
 
