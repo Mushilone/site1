@@ -33,10 +33,11 @@ class UserController {
         if(!comparePassword)
             return next(ApiError.internal("User Login: invalid password data!"));
         const token = generateJwt(user.id, user.username);
-        return res.json({token});
+        res.json({token});
     }
     async check(req, res, next) {
-        
+        const token = generateJwt(req.user.id, req.user.username);
+        return res.json({token});
     }
 
     async get(req, res) {

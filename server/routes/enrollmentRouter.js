@@ -1,12 +1,13 @@
 const Router = require("express");
 const router = new Router();
 const enrollmentController = require("../controllers/enrollmentController");
+const authMiddleware = require("../middlewares/authMiddleware");
 
-router.get('/', enrollmentController.get);
-router.get("/:id", enrollmentController.getId);
-router.post("/", enrollmentController.post);
-router.put("/", enrollmentController.put);
-router.delete("/:id", enrollmentController.delete);
+router.get('/', authMiddleware, enrollmentController.get);
+router.get("/:id", authMiddleware, enrollmentController.getId);
+router.post("/", authMiddleware, enrollmentController.post);
+router.put("/", authMiddleware, enrollmentController.put);
+router.delete("/:id", authMiddleware, enrollmentController.delete);
 
 
 module.exports = router;
