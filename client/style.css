@@ -99,9 +99,6 @@ nav a {
     display: flex;
     align-items: center;
     justify-content: center;
-   
-    
-    
     }
     .second-container{
    
@@ -123,61 +120,30 @@ nav a {
         
     }
     footer {
-        
-        margin-top: 10px;
-        padding: 10px;
+        margin: auto;
+        height: auto;
         font-family:"Oswald", serif;
         font: weight 500px;
         font-size: 14px;
         color: white;
         background:black;
     }
-    .registration{
-       
-        background-repeat: no-repeat;
-        padding:100px;
-        margin: 10px;
+    hr {
+        border: none;
+        border-top: 2px solid yellow;
+        width: 400px;
     }
-    
-    
-    
-.log-container{
-padding: 10px;
-background-repeat: no-repeat;
-background-position: right;
-font-family:"Oswald", serif;
-color: #FFDC33;
-margin: 0%;
-bottom: 0%;
-}
-form {
-    
-    padding: 30px;
-    max-width: 500px;
-    margin: auto;
-}
-label {
-    display: block;
-    margin-bottom: 10px;
-}
-
-input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-}
-
-button[type="submit"] {
-    
-    color:#FFDC33;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-
-h2{
-display: flex;
-justify-content:center;
-
-}
+    .adress{
+        text-align:left;
+        margin-right: 20px;
+        font-size: 16px;
+    }
+    .num{
+        text-align: left;
+        margin-right: 20px;
+        font-size: 21px;
+    }
+    .prava{
+        text-align:start;
+        
+    }

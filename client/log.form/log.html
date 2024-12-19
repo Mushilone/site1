@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>contacts</title>
+    <title>вход</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,15 +16,27 @@
             <a href="../index.html" class="logo"><img src="../img/ippontg.jpg" alt="logo"></a>
         </div>
         <nav>
-            <a href="../brand/brand.html">О бренде</a>
-            <a href="../catalog/catalog.html">Каталог</a>
-            <a href="../contacts/contacts.html">Контакты</a>
+            <a href="/client/brand/brand.html">О бренде</a>
+            <a href="/client/catalog/catalog.html">Каталог</a>
+            <a href="/client/contacts/contacts.html">Контакты</a>
         </nav>
-        <button class="registr"><a href="/client/reg.form/reg.html">Регистрация</a></button>
+    
+        <button class="registr"><a href="/client/log.form/log.html">Регистрация</a></button>
         </div>
     </header>
+    <div class="log-container">
+        <form action="/register" method="post">
+         <label for="username">Имя пользователя:</label>
+         <input type="text" id="username" name="username" required>     
+         <label for="password">Пароль:</label>
+         <input type="password" id="password" name="password" required>            
+        <button type="login">войти</button>
+        <button type="submit"><a href="/client/reg.form/reg.html">регистрация</a></button>
+        </form>
+        </div>
     <footer>
         <p>© 2024 IPPON-GYM. Все права защищены.</p>
     </footer>
+    
 </body>
 </html>

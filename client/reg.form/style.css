@@ -1,0 +1,109 @@
+body {
+    background-color:#e8e8e8;
+    background-image: url(/client/img/upback.jpg);
+    background-size:cover ;
+    margin:auto;
+    
+}
+header {
+    background: black;
+    color: white;
+    text-align: left 100px;
+}
+nav {
+    color:#e8e8e8;
+   
+}
+nav a {
+    margin: 0 50px;
+    text-decoration: none;
+    color: #ffffff;
+    line-height: 100%;
+    font-family:"Oswald", serif;
+    font: weight 500px;
+    font-style: normal;
+    font-size: 20px;
+    
+  
+}
+
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.header-container .logo img {
+    width: 80px;
+    height: 80px;
+}
+.registr {
+    
+    width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    border-color: none;
+}
+.log-container{
+    padding: 10px;
+    background-position: right;
+    font-family:"Oswald", serif;
+    color: #FFDC33;
+    margin: 200px;
+    bottom: 0%;
+    }
+    form {
+        
+        padding: 30px;
+        max-width: 500px;
+        margin: auto;
+    }
+    label {
+        display:block;
+        margin-bottom: 10px;
+    }
+    
+    input[type="text"], input[type="email"], input[type="password"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+    }
+    
+    button[type="login"] {
+        background-color: rgba(255, 255, 255, 0);
+        color:#FFDC33;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        font-family:"Oswald", serif;
+        font-size: 20px;
+        text-decoration: none;
+    }
+    button[type="submit"] {
+        background-color: rgba(255, 255, 255, 0);
+        color:#FFDC33;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        outline: none;
+        font-family:"Oswald", serif;
+        font-size: 20px;
+        text-decoration: none;
+    }
+    button a{
+        text-decoration: none;
+        color:#FFDC33
+    }
+footer {
+    text-align: center;
+    margin-top: auto;
+    padding: 10px;
+    font-family:"Oswald", serif;
+    font: weight 500px;
+    font-size: 14px;
+    color: white;
+    background-color:black;
+}

@@ -1,6 +1,5 @@
 body {
-    background-color:#e8e8e8;
-    background-image: url(https://images4.alphacoders.com/131/1318497.jpeg);
+    background-color:black;
     background-size:cover ;
     margin: auto;
     
@@ -45,6 +44,88 @@ nav a {
     border-radius: 5px;
     border-color: none;
 }
+.welcome{
+    background-image: url(/client/img/ronniecolman.jpg);
+    padding: 50px;
+    padding-bottom: 10%;
+   }
+   .slogan{
+    color:#FFDC33;
+    font-family:"Oswald", serif;
+    font-weight: 500;
+    font-size: 70px;
+    line-height:90px;
+    margin-top:20px;
+    margin-right: 50px;
+    display:block;
+    padding: 10px;
+       width: 1000px;
+       text-align: end;
+   }
+   .arny{
+    color:#FFDC33;   
+    font-family:"Oswald", serif;
+    font-weight: 500;
+    font-size: 50px;
+    line-height:67px;
+    margin-top:20px;
+    margin-right: 30px;
+    display: flex;
+   }
+   .history{
+       padding: 10px;
+       width: 700px;
+   }
+   .history-container{
+       width: auto;
+       height: auto;
+   }
+   h1{
+       color:#FFDC33;
+       font-family:"Oswald", serif;
+       font-weight: 500;
+       font-size: 50px;
+       line-height:67px;
+       margin-top:20px;
+       margin-right: 30px;
+       display: flex;
+   }
+   p{
+       color: #e8e8e8;
+       font-family:"Oswald", serif;
+       font-weight: 500;
+       font-size: 20px;
+       margin-top:20px;
+       margin-right: 30px;
+       display: flex;
+   }
+   h2{
+       color:#FFDC33;
+       font-family:"Oswald", serif;
+       font-weight: 500;
+       font-size: 40px;
+       margin-top:20px;
+       margin-right: 30px;
+       display: flex;
+   }
+   ul{
+       color: #e8e8e8;
+       font-family:"Oswald", serif;
+       font-weight: 500;
+       font-size: 20px;
+       margin-top:20px;
+       margin-right: 30px;
+       
+   }
+   ol{
+       color: #e8e8e8;
+       font-family:"Oswald", serif;
+       font-weight: 500;
+       font-size: 20px;
+       margin-top:20px;
+       margin-right: 30px;
+       
+   }
 
 footer {
     text-align: center;
