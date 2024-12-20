@@ -20,7 +20,7 @@ class UserController {
         const hashPassword = await bcrypt.hash(password, 5);
         const user = await User.create({ username: username, password: hashPassword });
         const token = generateJwt(user.id, user.username);
-        res.cookie("jwt", token);
+        res.cookie("jwt", token, {httpOnly: true, secure: false});
         return res.json("true");
     }
     async login(req, res, next) {
@@ -35,13 +35,13 @@ class UserController {
             return next(ApiError.internal("User Login: invalid password data!"));
         const token = generateJwt(user.id, user.username);
 
-        res.cookie("jwt", token);
+        res.cookie("jwt", token, {httpOnly: true, secure: false});
         return res.json("true");
     }
     async check(req, res, next) {
         const token = generateJwt(req.user.id, req.user.username);
-        res.cookie("jwt", token);
-        return res.json({ token });
+        res.cookie("jwt", token, {httpOnly: true, secure: false});
+        return res.json("true");
     }
     async logout(req, res, next) {
         res.clearCookie("jwt");
