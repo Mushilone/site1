@@ -45,12 +45,12 @@ nav a {
     border-color: none;
 }
 .welcome{
-    background-image: url(/client/img/ronniecolman.jpg);
+    background-image: url(../img/ronniecolman.jpg);
     padding: 200px;
     padding-bottom: 10%;
    }
    .container{
-    
+
    }
    .slogan{
     color:#FFDC33;

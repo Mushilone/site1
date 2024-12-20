@@ -47,7 +47,7 @@ nav a {
     border-color: none;
 }
 .welcome{
- background-image: url(/client/img/ronnie2.jpg);
+ background-image: url(../img/ronnie2.jpg);
  padding: 30px;
  padding-bottom: 10%;
 }
