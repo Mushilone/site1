@@ -3,7 +3,7 @@ const ApiError = require("../error/apiError");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 
 const generateJwt = (id, username) => {
     return jwt.sign({ id: id, username: username }, process.env.JWT_KEY, { expiresIn: "24h" });

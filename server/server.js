@@ -5,18 +5,19 @@ const User = require("./models/user");
 const Enrollment = require("./models/enrollment");
 const apiRouter = require("./routes/index");
 const errorHandler = require("./middlewares/errorHandlingMiddleware");
-const cookieParser = require("cookie-parser");
+// const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 
 
 const app = express();
 app.use(cors({
-    origin: "*",
+    // origin: "*",
+    origin: "http://127.0.0.1:5500",
     credentials: true
 }));
 app.use(express.json());
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use("/api", apiRouter);
 app.use(errorHandler);
 

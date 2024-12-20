@@ -9,7 +9,7 @@ async function register() {
     const res = await fetch("http://localhost:3000/api/user/register",
         {
             method: "POST",
-            headers: { 'Content-Type': "application/json" },
+            // headers: { 'Content-Type': "application/json" },
             body: JSON.stringify({ username: username.value, password: password.value })
         }
     );
@@ -31,6 +31,7 @@ async function login(){
     const res = await fetch("http://localhost:3000/api/user/login",
         {
             method: "POST",
+            credentials: "include",
             headers: { 'Content-Type': "application/json" },
             body: JSON.stringify({ username: username.value, password: password.value })
         }
@@ -40,6 +41,9 @@ async function login(){
         message.innerText = data.message;
         return;
     }
+    const usRes = await fetch("http://localhost:3000/api/user", {method: "GET"});
+    const users = usRes.json();
+    users.forEach((us) => alert(us.username));
     // window.location.replace("../index.html");
 }
 
@@ -48,10 +52,11 @@ async function login(){
 async function check(){
     const res = await fetch("http://localhost:3000/api/user/auth", {
         method: "GET",
+        credentials: "include"
         // headers:{
         //     "Cookie": "jwt" + token
         // }
-        credentials: "include"
+        // credentials: "include"
     });
     const data = res.json();
     alert(data.message);
