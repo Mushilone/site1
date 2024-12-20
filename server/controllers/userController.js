@@ -21,6 +21,7 @@ class UserController {
         const user = await User.create({ username: username, password: hashPassword });
         const token = generateJwt(user.id, user.username);
         res.cookie("jwt", token);
+        return res.json("true");
     }
     async login(req, res, next) {
         const { username, password } = req.body;
