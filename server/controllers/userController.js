@@ -3,7 +3,6 @@ const ApiError = require("../error/apiError");
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-// const cookieParser = require("cookie-parser");
 
 const generateJwt = (id, username) => {
     return jwt.sign({ id: id, username: username }, process.env.JWT_KEY, { expiresIn: "24h" });
@@ -20,8 +19,7 @@ class UserController {
         const hashPassword = await bcrypt.hash(password, 5);
         const user = await User.create({ username: username, password: hashPassword });
         const token = generateJwt(user.id, user.username);
-        res.cookie("jwt", token, {httpOnly: true, secure: false});
-        return res.json("true");
+        res.json({token});
     }
     async login(req, res, next) {
         const { username, password } = req.body;
@@ -35,16 +33,17 @@ class UserController {
             return next(ApiError.internal("User Login: invalid password data!"));
         const token = generateJwt(user.id, user.username);
 
-        res.cookie("jwt", token, {httpOnly: true, secure: false});
-        return res.json("true");
+        res.json({token});
     }
+    ///TODO: как работает чек и сделать логоут.
     async check(req, res, next) {
         const token = generateJwt(req.user.id, req.user.username);
-        res.cookie("jwt", token, {httpOnly: true, secure: false});
-        return res.json("true");
+        res.json({token});
     }
+    ///TODO: потом логаует сделать.
     async logout(req, res, next) {
-        res.clearCookie("jwt");
+        // res.clearCookie("jwt");
+        // res.json({token});
         return res.json("true");
     }
 

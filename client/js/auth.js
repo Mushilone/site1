@@ -31,35 +31,31 @@ async function login(){
     const res = await fetch("http://localhost:3000/api/user/login",
         {
             method: "POST",
-            credentials: "include",
             headers: { 'Content-Type': "application/json" },
             body: JSON.stringify({ username: username.value, password: password.value })
         }
     );
     const data = await res.json();
+    // alert(data.token);
+    localStorage.setItem("token", data.token);
+
     if (res.status != 200) {
         message.innerText = data.message;
         return;
     }
-    const usRes = await fetch("http://localhost:3000/api/user", {method: "GET"});
-    const users = usRes.json();
-    users.forEach((us) => alert(us.username));
+    const usRes = await fetch("http://localhost:3000/api/user", {method: "GET", headers: {"Authorization": "Bearer " + data.token}});
+    const users = await usRes.json();
+    alert(users.length);
     // window.location.replace("../index.html");
 }
 
 
-///TODO: localStorage посмотреть что это и начать делать.
 async function check(){
+    const token = localStorage.getItem("token");
     const res = await fetch("http://localhost:3000/api/user/auth", {
         method: "GET",
-        credentials: "include"
-        // headers:{
-        //     "Cookie": "jwt" + token
-        // }
-        // credentials: "include"
+        headers: {'Authorization': "Bearer " + token }
     });
-    const data = res.json();
+    const data = await res.json();
     alert(data.message);
-    // const token = document.cookie.split('; ').find(row => row.startsWith('jwt='));
-    // alert(token);
 }
