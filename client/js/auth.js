@@ -9,7 +9,7 @@ async function register() {
     const res = await fetch("http://localhost:3000/api/user/register",
         {
             method: "POST",
-            // headers: { 'Content-Type': "application/json" },
+            headers: { 'Content-Type': "application/json" },
             body: JSON.stringify({ username: username.value, password: password.value })
         }
     );
@@ -18,6 +18,7 @@ async function register() {
         message.innerText = data.message;
         return;
     }
+    localStorage.setItem("token", data.token);
     window.location.replace("../index.html");
 }
 async function login(){
@@ -35,18 +36,13 @@ async function login(){
             body: JSON.stringify({ username: username.value, password: password.value })
         }
     );
-    const data = await res.json();
-    // alert(data.token);
-    localStorage.setItem("token", data.token);
-
     if (res.status != 200) {
         message.innerText = data.message;
         return;
     }
-    const usRes = await fetch("http://localhost:3000/api/user", {method: "GET", headers: {"Authorization": "Bearer " + data.token}});
-    const users = await usRes.json();
-    alert(users.length);
-    // window.location.replace("../index.html");
+    const data = await res.json();
+    localStorage.setItem("token", data.token);
+    window.location.replace("../index.html");
 }
 
 
@@ -56,6 +52,14 @@ async function check(){
         method: "GET",
         headers: {'Authorization': "Bearer " + token }
     });
+    if(res.status == 403){
+        return false;
+    }
     const data = await res.json();
-    alert(data.message);
+    localStorage.setItem("userId", data.id);
+    return true;
+}
+function logout(){
+    localStorage.clear();
+    window.location.replace("../log.form/log.html");
 }

@@ -32,19 +32,10 @@ class UserController {
         if (!comparePassword)
             return next(ApiError.internal("User Login: invalid password data!"));
         const token = generateJwt(user.id, user.username);
-
         res.json({token});
     }
-    ///TODO: как работает чек и сделать логоут.
     async check(req, res, next) {
-        const token = generateJwt(req.user.id, req.user.username);
-        res.json({token});
-    }
-    ///TODO: потом логаует сделать.
-    async logout(req, res, next) {
-        // res.clearCookie("jwt");
-        // res.json({token});
-        return res.json("true");
+        res.json({id: req.user.id});
     }
 
     async get(req, res) {
@@ -58,10 +49,24 @@ class UserController {
             return next(ApiError.badRequest("User GET: invalid id param!"));
         res.json(await User.findAll({ where: { id: idParam } }));
     }
-    async put(req, res) {
-
+    async put(req, res, next) {
+        try{
+            const{id, username, password} = req.body;
+            if(!id || !username || !password){
+                return next(ApiError.badRequest("User PUT: body data is null!"));
+            }
+            if(isNaN(id)){
+                return next(ApiError.badRequest("User PUT: invalid id value!"));
+            }
+            if(!(await User.findByPk(id))){
+                return next(ApiError.badRequest("User PUT: user with that id not exists!"));
+            }
+            return res.json(await User.update({username: username, password: password}, {where: {id:id}}));
+        }
+        catch(err){
+            return next(ApiError.badRequest(err.message));
+        }
     }
-
 }
 
 module.exports = new UserController();
