@@ -36,11 +36,11 @@ async function login(){
             body: JSON.stringify({ username: username.value, password: password.value })
         }
     );
+    const data = await res.json();
     if (res.status != 200) {
         message.innerText = data.message;
         return;
     }
-    const data = await res.json();
     localStorage.setItem("token", data.token);
     window.location.replace("../index.html");
 }

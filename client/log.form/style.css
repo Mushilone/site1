@@ -75,7 +75,7 @@ nav a {
     
     button[type="login"] {
         background-color: rgba(255, 255, 255, 0);
-        color:#FFDC33;
+        color:white;
         padding: 10px;
         border: none;
         cursor: pointer;
@@ -97,7 +97,7 @@ nav a {
     }
     button a {
         text-decoration: none;
-        color:#FFDC33;
+        color:white;
     }
 footer {
     text-align: center;
