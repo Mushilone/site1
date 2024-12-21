@@ -50,8 +50,12 @@ nav a {
     border-radius: 5px;
     border-color:none;
     font-family:"Oswald", serif;
-  
+    
    
+}
+button a {
+    text-decoration: none;
+    color:black;
 }
 
 

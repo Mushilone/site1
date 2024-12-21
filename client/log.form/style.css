@@ -45,6 +45,9 @@ nav a {
     height: 30px;
     border-radius: 5px;
     border-color: none;
+    color: black;
+    font-family:"Oswald", serif;
+   
 }
 .log-container{
     padding: 10px;
@@ -93,9 +96,9 @@ nav a {
         font-size: 20px;
         text-decoration: none;
     }
-    button a{
+    button a {
         text-decoration: none;
-        color:#FFDC33
+        color:#FFDC33;
     }
 footer {
     text-align: center;

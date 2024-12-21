@@ -45,6 +45,11 @@ nav a {
     height: 30px;
     border-radius: 5px;
     border-color: none;
+    font-family:"Oswald", serif;
+}
+button a {
+    text-decoration: none;
+    color:black;
 }
 .welcome{
  background-image: url(../img/ronnie2.jpg);
