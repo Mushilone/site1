@@ -4,11 +4,9 @@ const User = require("../models/user");
 
 
 
-///TODO: узнать нужно, чтобы создавалось, обновлялось и удалялось с айди залогинненого пользователя ток?
 class EnrollmentController{
     async get(req, res){
         res.json(await Enrollment.findAll());
-        // res.json(req.user);
     }
     async getId(req, res, next){
         const idParam = req.params.id;
