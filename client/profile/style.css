@@ -1,0 +1,67 @@
+body {
+    background-color:black;
+    background-size:auto ;
+    
+    
+}
+header {
+    background: black;
+    color: white;
+    text-align: left 100px;
+}
+nav {
+    color:#e8e8e8;
+   
+}
+nav a {
+    margin: 0 50px;
+    text-decoration: none;
+    color: #ffffff;
+    line-height: 100%;
+    font-family:"Oswald", serif;
+    font: weight 500px;
+    font-style: normal;
+    font-size: 20px;
+    
+  
+}
+
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.header-container .logo img {
+    width: 80px;
+    height: 80px;
+}
+div{
+    text-align: center;
+    font-family:"Oswald", serif;
+    color: #FFDC33;
+}
+.button{
+    text-align: center;
+    font-family:"Oswald", serif;
+    color: #FFDC33;
+}
+hr {
+    border: none;
+    border-top: 2px solid yellow;
+    width: 400px;
+}
+
+footer {
+    text-align: center;
+    margin-top:800px;
+    padding: 10px;
+    font-family:"Oswald", serif;
+    font: weight 500px;
+    font-size: 14px;
+    color: white;
+    background-color:black;
+    
+}
