@@ -65,7 +65,7 @@ class UserController {
     async put(req, res, next) {
         try {
             const { id, name, surname, username, password } = req.body;
-            if (!id || !username || !password) {
+            if (!id || !username) {
                 return next(ApiError.badRequest("User PUT: body data is null!"));
             }
             if (isNaN(id)) {
@@ -74,8 +74,8 @@ class UserController {
             if (!(await User.findByPk(id))) {
                 return next(ApiError.badRequest("User PUT: user with that id not exists!"));
             }
-            if (!name && !surname)
-                return res.json(await User.update({ username: username, password: await bcrypt.hash(password, 5) }, { where: { id: id } }));
+            if(!password)
+                return res.json(await User.update({ name: name, surname: surname, username: username }, { where: { id: id } }));
             return res.json(await User.update({ name: name, surname: surname, username: username, password: await bcrypt.hash(password, 5) }, { where: { id: id } }));
         }
         catch (err) {

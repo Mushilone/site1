@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    <header>
+    <head>
         <div class="header-container">
             <div class="logo">
                 <a href="../index.html" class="logo"><img src="/client/img/ippontg.jpg" alt="logo"></a>
@@ -31,31 +31,31 @@
         font-family:Oswald, serif;"><a href="../profile/profile.html"
                     style="color:black;text-decoration: none;">Профиль</a></button>
         </div>
-    </header>
-    <div>
+    </head>
+    <div style="text-align: center;">
         <h1 id="message" style="color:red"></h1>
         <hr>
         <h1>Профиль</h1>
-        <h2 id="username">Пользователь </h1>
+        <h2 id="username">Пользователь </h2>
             <div style="display:flex;">
                 <h2>Имя </h2>
-                <input id="name">
+                <input id="name" autocomplete="off" />
             </div>
             <div style="display:flex;">
                 <h2>Фамилия </h2>
-                <input id="surname">
+                <input id="surname" autocomplete="off" />
             </div>
             <div style="display:flex;">
                 <h2>Предыдущий пароль</h2>
-                <input id="oldPassword">
+                <input id="oldPassword" autocomplete="off" />
             </div>
             <div style="display:flex;">
                 <h2>Новый пароль</h2>
-                <input id="password1">
+                <input id="password1" autocomplete="off" />
             </div>
             <div style="display:flex;">
                 <h2>Подтвердите пароль</h2>
-                <input id="password2">
+                <input id="password2" autocomplete="off" />
             </div>
     </div>
     <div class="button">
@@ -72,7 +72,6 @@
     <script src="../js/auth.js"></script>
     <script src="../js/usersAPI.js"></script>
     <script>
-
         window.onload = async () => {
             if (await check() == false) {
                 window.location.replace("../reg.form/reg.html");
@@ -93,6 +92,18 @@
                 surname.value = us.surname;
             }
             document.getElementById("edit").addEventListener("click", async () => {
+                if (!oldPassword.value && !password1.value && !password2.value) {
+                    const user = {
+                        id: localStorage.getItem("userId"),
+                        name: name.value,
+                        surname: surname.value,
+                        username: us.username
+                    };
+                    const updRes = await updateUser(user);
+                    if (updRes)
+                        document.getElementById("message").innerText = "Success";
+                    return;
+                }
                 if (!oldPassword.value || !password1.value || !password2.value) {
                     document.getElementById("message").innerText = "Password input is null!";
                     return;
@@ -112,10 +123,12 @@
                     password: password1.value
                 };
                 const updRes = await updateUser(user);
-                if(updRes)
+                if (updRes)
                     document.getElementById("message").innerText = "Success";
                 return;
-                ///TODO: убрать перезагрузку страницы после успешного обновления, и сделать возможность обновления без введения пароля старого и нового.
+                
+                ///TODO: убрать перезагрузку страницы после успешного обновления.
+                ///TODO: узнать где тут происходит изменение с файлами. 
             });
         };
 
