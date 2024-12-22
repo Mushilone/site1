@@ -61,7 +61,6 @@
     <h1>Текущие записи</h1> <!-- ///TODO: показ записей пользователя, и возмонжость удаления. -->
     <ul id="enrollmentsList">
     </ul>
-
     <footer>
         <p>© 2024 IPPON-GYM. Все права защищены.</p>
     </footer>
@@ -120,14 +119,15 @@
                 const month = today.getUTCMonth() + 1;
                 const year = today.getUTCFullYear();
                 const enr = document.createElement("li");
-                const date = document.createTextNode("Запись на тренировку: " + day + "/" + month + "/" + year);
+                const date = document.createElement("p");
+                date.innerText = "Запись на тренировку: " + day + "/" + month + "/" + year;
                 enr.appendChild(date);
                 list.appendChild(enr);
                 ///TODO: зачислить элемент в список.
                 ///TODO: отменить автообновление страницы.
-                alert("Запись на тренировку: " + day + "/" + month + "/" + year);
+                // alert("Запись на тренировку: " + day + "/" + month + "/" + year);
             });
-
+            
 
 
         };
