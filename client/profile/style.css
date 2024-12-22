@@ -53,6 +53,11 @@ hr {
     border-top: 2px solid yellow;
     width: 400px;
 }
+h1{
+    text-align: center;
+    font-family:"Oswald", serif;
+    color: #FFDC33;
+}
 
 footer {
     text-align: center;

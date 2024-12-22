@@ -15,70 +15,121 @@
 
 <body>
     <header>
-        <div class="header-container"> 
-        <div class="logo">
-            <a href="../index.html" class="logo"><img src="/client/img/ippontg.jpg" alt="logo"></a>
-        </div>
-        <nav>
-            <a href="../brand/brand.html">О бренде</a>
-            <a href="../catalog/catalog.html">Каталог</a>
-        </nav>
-    
-        <button class="registr" style="width: 150px;
+        <div class="header-container">
+            <div class="logo">
+                <a href="../index.html" class="logo"><img src="/client/img/ippontg.jpg" alt="logo"></a>
+            </div>
+            <nav>
+                <a href="../brand/brand.html">О бренде</a>
+                <a href="../catalog/catalog.html">Каталог</a>
+            </nav>
+
+            <button class="registr" style="width: 150px;
         height: 30px;
         border-radius: 5px;
         border-color:none;
-        font-family:Oswald, serif;"><a href="./profile.html" style="color:black;text-decoration: none;">Профиль</a></button>
+        font-family:Oswald, serif;"><a href="./profile.html"
+                    style="color:black;text-decoration: none;">Профиль</a></button>
         </div>
     </header>
     <div>
         <hr>
         <h1>Профиль</h1>
         <h2 id="username">Пользователь </h1>
-        <h2 id="name">Имя </h2>   
-        <h2 id="surname">Фамилия </h2>
+            <h2 id="name">Имя </h2>
+            <h2 id="surname">Фамилия </h2>
     </div>
     <div class="button">
-    <button style="width: 150px;
+        <button style="width: 150px;
     height: 30px;
     border-radius: 5px;
     border-color:none;
-    font-family:Oswald, serif;"><a href="../profileEdit/profileEdit.html" style="color:black;text-decoration: none;">Изменить</a></button>
+    font-family:Oswald, serif;"><a href="../profileEdit/profileEdit.html"
+                style="color:black;text-decoration: none;">Изменить</a></button>
     </div>
-    <li id="enrollmentsList">
-    </li>
     <hr>
+
+    <h1>Запись</h1> <!-- ///TODO: записаться. -->
+    <h3 style="color:red; text-align: center;font-family: Oswald, serif;" id="addMessage"></h3>
+    <div style="display:flex;">
+        <h2>Дата </h2>
+        <input type="date" id="date" />
+        <button id="add">Записаться</button>
+    </div>
+    <hr>
+
+    <h1>Текущие записи</h1> <!-- ///TODO: показ записей пользователя, и возмонжость удаления. -->
+    <ul id="enrollmentsList">
+    </ul>
+
     <footer>
         <p>© 2024 IPPON-GYM. Все права защищены.</p>
     </footer>
     <script src="../js/auth.js"></script>
     <script src="../js/usersAPI.js"></script>
+    <script src="../js/enrollmentsAPI.js"></script>
     <script>
         window.onload = async () => {
-            if(await check() == false){
+            if (await check() == false) {
                 window.location.replace("../reg.form/reg.html");
                 return;
             }
             const us = await getUsersById(localStorage.getItem("userId"));
             document.getElementById("username").innerText += " " + us.username;
-            if(!us.name){
+            if (!us.name) {
                 document.getElementById("name").innerText += " отсутствует";
             }
-            else{
+            else {
                 document.getElementById("name").innerText += " " + us.name;
             }
-            if(!us.surname){
+            if (!us.surname) {
                 document.getElementById("surname").innerText += " отсутствует";
             }
-            else{
+            else {
                 document.getElementById("surname").innerText += " " + us.surname;
             }
-            ///TODO: сделать показ записей, и кнопку с возможностью записи на определнный день.
-            
+
+            document.getElementById("add").addEventListener("click", async () => {
+                if(!document.getElementById("date").value){
+                    document.getElementById("addMessage").innerText = "Date input is null!";
+                    return;
+                }
+                const iDate = new Date(document.getElementById("date").value);
+                const iDay = iDate.getUTCDate();
+                const iMonth = iDate.getUTCMonth() + 1;
+                const iYear = iDate.getUTCFullYear();
+                const enr = {
+                    date: iMonth + "." + iDay + "." + iYear,
+                    userId: localStorage.getItem("userId")
+                };
+                const data = await addEnrollment(enr);
+                if(!data){
+                    alert("niga");
+                    return;
+                }
+                document.getElementById("addMessage").innerText = "Added new enrollment!";
+            });
+
+            const data = await getEnrollments();  ///TODO: показ списка записей.
+            const list = document.getElementById("enrollmentsList");
+            data.forEach((val) => {
+                if (!val.UserId)
+                    return;
+                const today = new Date(val.date);
+                const day = today.getUTCDate();
+                const month = today.getUTCMonth() + 1;
+                const year = today.getUTCFullYear();
+                const enr = document.createElement("li");
+                const date = document.createTextNode("Запись на тренировку: " + day + "/" + month + "/" + year);
+                enr.appendChild(date);
+                list.appendChild(enr);
+                alert("Запись на тренировку: " + day + "/" + month + "/" + year);
+            });
+
 
 
         };
-        
+
 
     </script>
 
