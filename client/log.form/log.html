@@ -15,17 +15,17 @@
 
 <body>
     <header>
-        <div class="header-container"> 
-        <div class="logo">
-            <a href="../index.html" class="logo"><img src="../img/ippontg.jpg" alt="logo"></a>
-        </div>
-        <nav>
-            <a href="../brand/brand.html">О бренде</a>
-            <a href="../catalog/catalog.html">Каталог</a>
+        <div class="header-container">
+            <div class="logo">
+                <a href="../index.html" class="logo"><img src="../img/ippontg.jpg" alt="logo"></a>
+            </div>
+            <nav>
+                <a href="../brand/brand.html">О бренде</a>
+                <a href="../catalog/catalog.html">Каталог</a>
 
-        </nav>
-    
-        <button class="registr"><a href="../reg.form/reg.html">Регистрация</a></button>
+            </nav>
+
+            <button class="registr"><a href="../reg.form/reg.html" style="color:black;">Регистрация</a></button>
         </div>
     </header>
     <div class="log-container">
@@ -35,7 +35,7 @@
             <input type="text" id="username" name="username" required>
             <label for="password">Пароль:</label>
             <input type="password" id="password" name="password" required>
-            <button type="login" id="send">войти</button>
+            <button type="login" id="send" onclick="login()">войти</button>
             <button type="submit"><a href="../reg.form/reg.html">регистрация</a></button>
         </div>
     </div>
@@ -43,14 +43,13 @@
         <p>© 2024 IPPON-GYM. Все права защищены.</p>
     </footer>
     <script src="../js/auth.js"></script>
-    <button onclick="check()">Check</button> 
     <script>
         window.onload = async () => {
-            document.getElementById("send").addEventListener("click", async () => {
-                await login();
-            });
+            if (await check() == true) {
+                window.location.replace("../profile/profile.html");
+            }
         };
-        
+
 
     </script>
 

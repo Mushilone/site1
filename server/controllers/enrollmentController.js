@@ -14,19 +14,19 @@ class EnrollmentController{
             return next(ApiError.badRequest("Enrollment GET: id param is null!"));
         if (isNaN(idParam)) 
             return next(ApiError.badRequest("Enrollment GET: invalid id param!"));
-        res.json(await Enrollment.findAll({where:{id: idParam}}));
+        res.json(await Enrollment.findByPk({idParam}));
     }
     async post(req, res, next){
         try{
-            const {date, userId} = req.body;
-            if(date == null || userId == null)
+            const {date, UserId} = req.body;
+            if(date == null || UserId == null)
                 return next(ApiError.badRequest("Enrollment POST: invalid body data!"));
             const d = new Date(date);
-            if(isNaN(d) || isNaN(userId))
+            if(isNaN(d) || isNaN(UserId))
                 return next(ApiError.badRequest("Enrollment POST: invalid date or id value!"));
-            if((await User.findAll({where:{id: userId}})).length == 0)
+            if((await User.findAll({where:{id: UserId}})).length == 0)
                 return next(ApiError.badRequest("Enrollment POST: user with that id not exists!"));
-            const enr = await Enrollment.create({date, userId});
+            const enr = await Enrollment.create({date, UserId});
             return res.json(enr);
         }
         catch(err){

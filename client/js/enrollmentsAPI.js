@@ -1,11 +1,84 @@
-async function getId(id){
-    if(!id){
-        alert("null");
+async function getEnrollmentsById(id) {
+    if (!id) {
         return;
     }
-    if(isNaN(id)){
-        alert("nan value");
+    const res = await fetch("http://localhost:3000/api/enrollment/" + id,
+        {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+        });
+    const data = await res.json();
+    if (res.status != 200) {
         return;
     }
-    alert(id);
+    return data;
+}
+async function getEnrollments() {
+    const res = await fetch("http://localhost:3000/api/enrollment",
+        {
+            method: "GET",
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+        });
+    const data = await res.json();
+    if (res.status != 200) {
+        return;
+    }
+    return data;
+}
+// async function updateEnrollment(enrollment) {
+//     if (!enrollment) {
+//         alert("Enrollment is null!");
+//         return;
+//     }
+//     const res = await fetch("http://localhost:3000/api/enrollment",
+//         {
+//             method: "PUT",
+//             headers:
+//             {
+//                 "Authorization": "Bearer " + localStorage.getItem("token"),
+//                 "Content-Type": "application/json"
+//             },
+//             body: JSON.stringify({ id: enrollment.id, date: enrollment.date })
+//         });
+//     const data = await res.json();
+//     if(res.status != 200){
+//         alert(data.message);
+//         return;
+//     }
+//     return data;
+// }
+async function addEnrollment(enrollment) {
+    if (!enrollment) {
+        return;
+    }
+    const res = await fetch("http://localhost:3000/api/enrollment",
+        {
+            method: "POST",
+            headers:
+            {
+                "Authorization": "Bearer " + localStorage.getItem("token"),
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ date: enrollment.date, UserId: enrollment.userId })
+        });
+    const data = await res.json();
+    if (res.status != 200) {
+        return;
+    }
+    return data;
+}
+async function deleteEnrollment(id) {
+    if (!id) {
+        return;
+    }
+    const res = await fetch("http://localhost:3000/api/enrollment/" + id,
+        {
+            method: "DELETE",
+            headers: { "Authorization": "Bearer " + localStorage.getItem("token") }
+        });
+    const data = await res.json();
+    if (res.status != 200) {
+        return;
+    }
+    return data;
 }

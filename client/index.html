@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,45 +8,60 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
 
-<header>
-    <div class="header-container"> 
-    <div class="logo">
-    <img src="img/ippontg.jpg" alt="logo">
-    </div>
-    <nav>
-        <a href="brand/brand.html">О бренде</a>
-        <a href="catalog/catalog.html">Каталог</a>
-    </nav>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="img/ippontg.jpg" alt="logo">
+            </div>
+            <nav>
+                <a href="brand/brand.html">О бренде</a>
+                <a href="catalog/catalog.html">Каталог</a>
+            </nav>
 
-    <button class="registr"><a href="reg.form/reg.html">Регистрация</a></button>
-    </div>
-</header> 
-<main>
-    <section class="welcome">
-    <div class="container">
-        <h4 class="intro">СПОРТИВНЫЙ КОМПЛЕКС</h4>
-        <h1 class="slogan">IPPON-Путь к совершенству</h1>
-        <p class="desc">Спортивный комплекс,<br> вдохновленный восточной культурой боевых искусств, <br>фитнеса и благополучия.</p>
-    </div>
-    </section>
-    <section class="continue">
-        <div class="second-container">
-        <h1 class="about">Дзен в спорте, самосовершенствование во всем</h1>
-        <p class="club">Наш спортивный клуб — отличное место для тех, кто хочет оставаться здоровым и активным! 
-            Мы предлагаем широкий спектр спортивных занятий и тренировок для всех возрастов и уровней подготовки.</p>  
-        </div>  
-    </section>   
-    <footer>
-        <hr>
-        <p class="adress">г.Симферополь, ул.ленина, 34/5</p>
-        <p class="num">+7 (978) 111-11-11</p>
-    <p class="prava">© 2024 IPPON-GYM. Все права защищены.</p>
-    </footer>
-    <script src="./js/auth.js"></script>
-    <button onclick="check()">Check</button> 
+            <button class="registr"><a href="reg.form/reg.html" id="authLink">Регистрация</a></button>
+        </div>
+    </header>
+    <main>
+        <section class="welcome">
+            <div class="container">
+                <h4 class="intro">СПОРТИВНЫЙ КОМПЛЕКС</h4>
+                <h1 class="slogan">IPPON-Путь к совершенству</h1>
+                <p class="desc">Спортивный комплекс,<br> вдохновленный восточной культурой боевых искусств, <br>фитнеса
+                    и благополучия.</p>
+            </div>
+        </section>
+        <section class="continue">
+            <div class="second-container">
+                <h1 class="about">Дзен в спорте, самосовершенствование во всем</h1>
+                <p class="club">Наш спортивный клуб — отличное место для тех, кто хочет оставаться здоровым и активным!
+                    Мы предлагаем широкий спектр спортивных занятий и тренировок для всех возрастов и уровней
+                    подготовки.</p>
+            </div>
+        </section>
+        <footer>
+            <hr>
+            <p class="adress">г.Симферополь, ул.ленина, 34/5</p>
+            <p class="num">+7 (978) 111-11-11</p>
+            <p class="prava">© 2024 IPPON-GYM. Все права защищены.</p>
+        </footer>
+        <script src="./js/auth.js"></script>
 </body>
+<script src="./js/auth.js"></script>
+<script>
+    window.onload = async() =>{
+        if(await check() == false)
+            return;
+        const authLink = document.getElementById("authLink");
+        authLink.href= "./profile/profile.html";
+        authLink.innerText = "Профиль";
+    }
+</script>
+
 </html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>вход</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <head>
+        <div class="header-container">
+            <div class="logo">
+                <a href="../index.html" class="logo"><img src="/client/img/ippontg.jpg" alt="logo"></a>
+            </div>
+            <nav>
+                <a href="../brand/brand.html">О бренде</a>
+                <a href="../catalog/catalog.html">Каталог</a>
+            </nav>
+
+            <button class="registr" style="width: 150px;
+        height: 30px;
+        border-radius: 5px;
+        border-color:none;
+        font-family:Oswald, serif;"><a href="../profile/profile.html"
+                    style="color:black;text-decoration: none;">Профиль</a></button>
+        </div>
+    </head>
+    <div style="text-align: center;">
+        <h1 id="message" style="color:red"></h1>
+        <h1 id="animatedText" class="fade-in" style="color:red"></h1>
+        <hr>
+        <h1>Профиль</h1>
+        <h2 id="username">Пользователь </h2>
+        <div style="display:flex;">
+            <h2>Имя </h2>
+            <input id="name" autocomplete="off" />
+        </div>
+        <div style="display:flex;">
+            <h2>Фамилия </h2>
+            <input id="surname" autocomplete="off" />
+        </div>
+        <div style="display:flex;">
+            <h2>Предыдущий пароль</h2>
+            <input id="oldPassword" autocomplete="off" />
+        </div>
+        <div style="display:flex;">
+            <h2>Новый пароль</h2>
+            <input id="password1" autocomplete="off" />
+        </div>
+        <div style="display:flex;">
+            <h2>Подтвердите пароль</h2>
+            <input id="password2" autocomplete="off" />
+        </div>
+    </div>
+    <div class="button">
+        <button id="edit" style="width: 150px;
+    height: 30px;
+    border-radius: 5px;
+    border-color:none;
+    font-family:Oswald, serif;">Изменить</button>
+    </div>
+    <hr>
+    <footer>
+        <p>© 2024 IPPON-GYM. Все права защищены.</p>
+    </footer>
+    <script src="../js/auth.js"></script>
+    <script src="../js/usersAPI.js"></script>
+    <script>
+        window.onload = async () => {
+            if (await check() == false) {
+                window.location.replace("../reg.form/reg.html");
+                return;
+            }
+            const us = await getUsersById(localStorage.getItem("userId"));
+            const username = document.getElementById("username");
+            const name = document.getElementById("name");
+            const surname = document.getElementById("surname");
+            const oldPassword = document.getElementById("oldPassword");
+            const password1 = document.getElementById("password1");
+            const password2 = document.getElementById("password2");
+            username.innerText += " " + us.username;
+            if (us.name) {
+                name.value = us.name;
+            }
+            if (us.surname) {
+                surname.value = us.surname;
+            }
+            document.getElementById("edit").addEventListener("click", async () => {
+                if (!oldPassword.value && !password1.value && !password2.value) {
+                    const user = {
+                        id: localStorage.getItem("userId"),
+                        name: name.value,
+                        surname: surname.value,
+                        username: us.username
+                    };
+                    const updRes = await updateUser(user);
+                    if (updRes)
+                        document.getElementById("message").innerText = "Success";
+                    return;
+                }
+                if (!oldPassword.value || !password1.value || !password2.value) {
+                    document.getElementById("message").innerText = "Password input is null!";
+                    return;
+                }
+                if (!(await checkPassword(oldPassword.value))) {
+                    return;
+                }
+                if (password1.value != password2.value) {
+                    document.getElementById("message").innerText = "Invalid confirm password!";
+                    return;
+                }
+                const user = {
+                    id: localStorage.getItem("userId"),
+                    name: name.value,
+                    surname: surname.value,
+                    username: us.username,
+                    password: password1.value
+                };
+                const updRes = await updateUser(user);
+                if (updRes) {
+                    document.getElementById("message").innerText = "Success";
+                }
+            });
+        };
+    </script>
+
+</body>
+
+</html>

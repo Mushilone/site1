@@ -24,7 +24,7 @@
             <a href="../catalog/catalog.html">Каталог</a>
         </nav>
     
-        <button class="registr"><a href="reg.html">Регистрация</a></button>
+        <button class="registr"><a href="reg.html" style="color:black;">Регистрация</a></button>
         </div>
     </header>
     <div class="log-container">
@@ -36,7 +36,7 @@
                 <label for="password">Пароль:</label>
                 <input type="password" id="password" name="password" required>
                 
-                <button type="login" id="send">регистрация</button>
+                <button type="login" id="send" onclick="register()">регистрация</button>
                 <button type="submit"><a href="../log.form/log.html">войти</a></button>
         </div>
     </div>
@@ -46,9 +46,9 @@
     <script src="../js/auth.js"></script>
     <script>
         window.onload = async () => {
-            document.getElementById("send").addEventListener("click", async () =>{
-                await register();
-            });
+            if (await check() == true) {
+                window.location.replace("../profile/profile.html");
+            }
         };
     </script>
 </body>
