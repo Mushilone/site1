@@ -28,11 +28,12 @@
         height: 30px;
         border-radius: 5px;
         border-color:none;
-        font-family:Oswald, serif;"><a href="./profile.html"
+        font-family:Oswald, serif;"><a href="../profile/profile.html"
                     style="color:black;text-decoration: none;">Профиль</a></button>
         </div>
     </header>
     <div>
+        <h1 id="message" style="color:red"></h1>
         <hr>
         <h1>Профиль</h1>
         <h2 id="username">Пользователь </h1>
@@ -45,8 +46,16 @@
                 <input id="surname">
             </div>
             <div style="display:flex;">
-                <h2>Пароль </h2>
-                <input id="password">
+                <h2>Предыдущий пароль</h2>
+                <input id="oldPassword">
+            </div>
+            <div style="display:flex;">
+                <h2>Новый пароль</h2>
+                <input id="password1">
+            </div>
+            <div style="display:flex;">
+                <h2>Подтвердите пароль</h2>
+                <input id="password2">
             </div>
     </div>
     <div class="button">
@@ -64,7 +73,6 @@
     <script src="../js/usersAPI.js"></script>
     <script>
 
-        ///TODO: расхешить пароль, сделать обновление пользователя.
         window.onload = async () => {
             if (await check() == false) {
                 window.location.replace("../reg.form/reg.html");
@@ -74,7 +82,9 @@
             const username = document.getElementById("username");
             const name = document.getElementById("name");
             const surname = document.getElementById("surname");
-            const password = document.getElementById("password");
+            const oldPassword = document.getElementById("oldPassword");
+            const password1 = document.getElementById("password1");
+            const password2 = document.getElementById("password2");
             username.innerText += " " + us.username;
             if (us.name) {
                 name.value = us.name;
@@ -82,15 +92,30 @@
             if (us.surname) {
                 surname.value = us.surname;
             }
-            password.value = us.password;
             document.getElementById("edit").addEventListener("click", async () => {
+                if (!oldPassword.value || !password1.value || !password2.value) {
+                    document.getElementById("message").innerText = "Password input is null!";
+                    return;
+                }
+                if (!(await checkPassword(oldPassword.value))) {
+                    return;
+                }
+                if (password1.value != password2.value) {
+                    document.getElementById("message").innerText = "Invalid confirm password!";
+                    return;
+                }
                 const user = {
-                    name: name,
-                    surname: surname,
-                    username: username,
-                    password: password
+                    id: localStorage.getItem("userId"),
+                    name: name.value,
+                    surname: surname.value,
+                    username: us.username,
+                    password: password1.value
                 };
-                alert(await updateUser(user));
+                const updRes = await updateUser(user);
+                if(updRes)
+                    document.getElementById("message").innerText = "Success";
+                return;
+                ///TODO: убрать перезагрузку страницы после успешного обновления, и сделать возможность обновления без введения пароля старого и нового.
             });
         };
 

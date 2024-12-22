@@ -34,8 +34,21 @@ class UserController {
         const token = generateJwt(user.id, user.username);
         res.json({ token });
     }
-    async check(req, res, next) {
+    async check(req, res) {
         res.json({ id: req.user.id });
+    }
+    async checkPassword(req, res, next){
+        const {oldPassword} = req.body;
+        if(!oldPassword)
+            return next(ApiError.badRequest("Check password: old password is null!"));
+        const user = await User.findByPk(req.user.id);
+        if (user == null)
+            return next(ApiError.internal("User Login: user with that username not exists!"));
+        console.log("USERS PASSWORD: " + user.password);
+        console.log("OLD USERS PASSWORD: " + user.password);
+        if(!bcrypt.compareSync(oldPassword, user.password))
+            return next(ApiError.badRequest("Check password: invalid password!"));
+        res.json(true);
     }
 
     async get(req, res) {
@@ -62,8 +75,8 @@ class UserController {
                 return next(ApiError.badRequest("User PUT: user with that id not exists!"));
             }
             if (!name && !surname)
-                return res.json(await User.update({ username: username, password: password }, { where: { id: id } }));
-            return res.json(await User.update({ name: name, surname: surname, username: username, password: password }, { where: { id: id } }));
+                return res.json(await User.update({ username: username, password: await bcrypt.hash(password, 5) }, { where: { id: id } }));
+            return res.json(await User.update({ name: name, surname: surname, username: username, password: await bcrypt.hash(password, 5) }, { where: { id: id } }));
         }
         catch (err) {
             return next(ApiError.badRequest(err.message));

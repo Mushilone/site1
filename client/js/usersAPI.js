@@ -1,10 +1,8 @@
 async function getUsersById(id) {
     if (!id) {
-        alert("null");
         return;
     }
     if (isNaN(id)) {
-        alert("nan value");
         return;
     }
     const res = await fetch("http://localhost:3000/api/user/" + id, {
@@ -24,18 +22,25 @@ async function getUsers() {
 }
 async function updateUser(user) {
     if (!user) {
-        alert("user update: null value");
         return;
     }
     const res = await fetch("http://localhost:3000/api/user", {
         method: "PUT",
-        headers: { "Authorization": "Bearer " + localStorage.getItem("token") },
-        body: JSON.parse({user})  // ?
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token"),
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify({
+            id: user.id,
+            name: user.name,
+            surname: user.surname,
+            username: user.username,
+            password: user.password
+        })
     });
-    if(res.status != 200){
-        alert("user update: invalid status request");
+    if (res.status != 200) {
         return;
     }
-    const data = res.json();
+    const data = await res.json();
     return data;
 }
