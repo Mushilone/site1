@@ -29,7 +29,7 @@
         border-radius: 5px;
         border-color:none;
         font-family:Oswald, serif;"><a href="./profile.html"
-                    style="color:black;text-decoration: none;">Профиль</a></button>
+                    style="color:black;text-decoration: none;" id="logout">Выход</a></button>
         </div>
     </header>
     <div>
@@ -49,7 +49,7 @@
     </div>
     <hr>
 
-    <h1>Запись</h1> <!-- ///TODO: записаться. -->
+    <h1>Запись</h1>
     <h3 style="color:red; text-align: center;font-family: Oswald, serif;" id="addMessage"></h3>
     <div style="display:flex;">
         <h2>Дата </h2>
@@ -58,8 +58,8 @@
     </div>
     <hr>
 
-    <h1>Текущие записи</h1> <!-- ///TODO: показ записей пользователя, и возмонжость удаления. -->
-    <ul id="enrollmentsList">
+    <h1>Текущие записи</h1>
+    <ul id="enrollmentsList" style="color:#FFDC33;font-family: Oswald, serif;">
     </ul>
     <footer>
         <p>© 2024 IPPON-GYM. Все права защищены.</p>
@@ -73,6 +73,8 @@
                 window.location.replace("../reg.form/reg.html");
                 return;
             }
+            document.getElementById("logout").addEventListener("click", logout);
+
             const us = await getUsersById(localStorage.getItem("userId"));
             document.getElementById("username").innerText += " " + us.username;
             if (!us.name) {
@@ -89,7 +91,7 @@
             }
 
             document.getElementById("add").addEventListener("click", async () => {
-                if(!document.getElementById("date").value){
+                if (!document.getElementById("date").value) {
                     document.getElementById("addMessage").innerText = "Date input is null!";
                     return;
                 }
@@ -102,14 +104,13 @@
                     userId: localStorage.getItem("userId")
                 };
                 const data = await addEnrollment(enr);
-                if(!data){
-                    alert("niga");
+                if (!data) {
                     return;
                 }
-                document.getElementById("addMessage").innerText = "Added new enrollment!";
+                window.location.reload();
             });
 
-            const data = await getEnrollments();  ///TODO: показ списка записей.
+            const data = await getEnrollments();
             const list = document.getElementById("enrollmentsList");
             data.forEach((val) => {
                 if (!val.UserId)
@@ -119,17 +120,19 @@
                 const month = today.getUTCMonth() + 1;
                 const year = today.getUTCFullYear();
                 const enr = document.createElement("li");
-                const date = document.createElement("p");
+                enr.style = "display:flex;";
+                const date = document.createElement("h3");
                 date.innerText = "Запись на тренировку: " + day + "/" + month + "/" + year;
+                const delBtn = document.createElement("button");
+                delBtn.innerText = "Удалить";
+                delBtn.addEventListener("click", async () => {
+                    const delData = await deleteEnrollment(val.id);
+                    window.location.reload();
+                });
                 enr.appendChild(date);
+                enr.appendChild(delBtn);
                 list.appendChild(enr);
-                ///TODO: зачислить элемент в список.
-                ///TODO: отменить автообновление страницы.
-                // alert("Запись на тренировку: " + day + "/" + month + "/" + year);
             });
-            
-
-
         };
 
 

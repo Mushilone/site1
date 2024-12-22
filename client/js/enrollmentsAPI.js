@@ -1,6 +1,5 @@
 async function getEnrollmentsById(id) {
     if (!id) {
-        alert("null");
         return;
     }
     const res = await fetch("http://localhost:3000/api/enrollment/" + id,
@@ -10,7 +9,6 @@ async function getEnrollmentsById(id) {
         });
     const data = await res.json();
     if (res.status != 200) {
-        alert(data.message);
         return;
     }
     return data;
@@ -23,7 +21,6 @@ async function getEnrollments() {
         });
     const data = await res.json();
     if (res.status != 200) {
-        alert(data.message);
         return;
     }
     return data;
@@ -52,7 +49,6 @@ async function getEnrollments() {
 // }
 async function addEnrollment(enrollment) {
     if (!enrollment) {
-        alert("Enrollment is null");
         return;
     }
     const res = await fetch("http://localhost:3000/api/enrollment",
@@ -67,14 +63,12 @@ async function addEnrollment(enrollment) {
         });
     const data = await res.json();
     if (res.status != 200) {
-        alert(data.message);
         return;
     }
     return data;
 }
 async function deleteEnrollment(id) {
     if (!id) {
-        alert("id is null");
         return;
     }
     const res = await fetch("http://localhost:3000/api/enrollment/" + id,
@@ -84,7 +78,6 @@ async function deleteEnrollment(id) {
         });
     const data = await res.json();
     if (res.status != 200) {
-        alert(data.message);
         return;
     }
     return data;
