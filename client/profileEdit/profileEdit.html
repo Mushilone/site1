@@ -14,6 +14,7 @@
 </head>
 
 <body>
+
     <head>
         <div class="header-container">
             <div class="logo">
@@ -34,29 +35,30 @@
     </head>
     <div style="text-align: center;">
         <h1 id="message" style="color:red"></h1>
+        <h1 id="animatedText" class="fade-in" style="color:red"></h1>
         <hr>
         <h1>Профиль</h1>
         <h2 id="username">Пользователь </h2>
-            <div style="display:flex;">
-                <h2>Имя </h2>
-                <input id="name" autocomplete="off" />
-            </div>
-            <div style="display:flex;">
-                <h2>Фамилия </h2>
-                <input id="surname" autocomplete="off" />
-            </div>
-            <div style="display:flex;">
-                <h2>Предыдущий пароль</h2>
-                <input id="oldPassword" autocomplete="off" />
-            </div>
-            <div style="display:flex;">
-                <h2>Новый пароль</h2>
-                <input id="password1" autocomplete="off" />
-            </div>
-            <div style="display:flex;">
-                <h2>Подтвердите пароль</h2>
-                <input id="password2" autocomplete="off" />
-            </div>
+        <div style="display:flex;">
+            <h2>Имя </h2>
+            <input id="name" autocomplete="off" />
+        </div>
+        <div style="display:flex;">
+            <h2>Фамилия </h2>
+            <input id="surname" autocomplete="off" />
+        </div>
+        <div style="display:flex;">
+            <h2>Предыдущий пароль</h2>
+            <input id="oldPassword" autocomplete="off" />
+        </div>
+        <div style="display:flex;">
+            <h2>Новый пароль</h2>
+            <input id="password1" autocomplete="off" />
+        </div>
+        <div style="display:flex;">
+            <h2>Подтвердите пароль</h2>
+            <input id="password2" autocomplete="off" />
+        </div>
     </div>
     <div class="button">
         <button id="edit" style="width: 150px;
@@ -123,16 +125,12 @@
                     password: password1.value
                 };
                 const updRes = await updateUser(user);
-                if (updRes)
+                if (updRes) {
                     document.getElementById("message").innerText = "Success";
-                return;
-                
-                ///TODO: убрать перезагрузку страницы после успешного обновления.
-                ///TODO: узнать где тут происходит изменение с файлами. 
+                }
             });
         };
-
-
+        ///TODO: исправить положение полей ввода, центризовать их.
     </script>
 
 </body>
